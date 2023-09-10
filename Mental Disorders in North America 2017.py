@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[35]:
-
-
 #Importing necessary libraries
 import matplotlib.pyplot as plt
 import numpy as np
@@ -16,22 +13,9 @@ df = pd.read_csv('C:/Users/Dominga Genao/OneDrive/Escritorio/mental.csv')
 df = df.drop("index",axis=1)
 df.info()
 
-
-# In[36]:
-
-
 # Check the head and tail of the dataframe:
 df
-
-
-# In[37]:
-
-
 df.iloc[6467]
-
-
-# In[38]:
-
 
 map_names = {'geometry': 'country',
              'Year' : 'year',
@@ -46,16 +30,8 @@ map_names = {'geometry': 'country',
 df.rename(columns=map_names,inplace=True)
 df.head()
 
-
-# In[39]:
-
-
 df.dropna(inplace=True)
 df
-
-
-# In[90]:
-
 
 df['year'] = pd.to_numeric(df['year'])
 df['schizo'] = pd.to_numeric(df['schizo'])
@@ -63,22 +39,11 @@ df['bipolar'] = pd.to_numeric(df['bipolar'])
 df['eds'] = pd.to_numeric(df['eds'])
 df.info()
 
-
-# In[91]:
-
-
 dom = df[df['Code'] == 'DOM']
 dom.set_index('year')
 dom
 
-
-# In[92]:
-
-
 dom.plot(x='year', title = 'Prevalence of Various Mental Health Diagnosis in the DOM', xlabel = 'Year', ylabel = 'Prevalence (%)')
-
-
-# In[93]:
 
 
 # Lista de paises de norte américa
@@ -105,30 +70,16 @@ countries_americas = ['Argentina', 'Brazil',
                       'Bermuda', 'Anguilla', 'Montserrat']
 
 
-# In[46]:
-
-
 la = df[df['country'].isin(countries_americas)]
 la = la[la['year'] == 2017]
 la.head()
 
 
-# In[48]:
-
-
 pip install plotly
-
-
-# In[94]:
-
 
 import plotly.graph_objs as go 
 from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 init_notebook_mode(connected=True) 
-
-
-# In[108]:
-
 
 # Schizophrenia
 sch_data = dict(
@@ -143,9 +94,6 @@ sch_data = dict(
       ) 
 sch_layout = dict(title = 'Prevalence of Schizophrenia in North America in 2017', 
               geo = dict({'scope':'north america'}, projection = {'type':'natural earth'}, showframe = True))
-
-
-# In[112]:
 
 
 # Bipolar Disorder
@@ -163,9 +111,6 @@ bp_layout = dict(title = 'Prevalence of Bipolar Disorder in North America in 201
               geo = dict({'scope':'north america'}, projection = {'type':'natural earth'}, showframe = True))
 
 
-# In[113]:
-
-
 # Eating Disorders
 ed_data = dict(
         type = 'choropleth',
@@ -179,9 +124,6 @@ ed_data = dict(
       ) 
 ed_layout = dict(title = 'Prevalence of Eating Disorders in North America in 2017', 
               geo = dict({'scope':'north america'}, projection = {'type':'natural earth'}, showframe = True))
-
-
-# In[114]:
 
 
 # Anxiety
@@ -199,9 +141,6 @@ anx_layout = dict(title = 'Prevalence of Anxiety Disorder in North America in 20
               geo = dict({'scope':'north america'}, projection = {'type':'natural earth'}, showframe = True))
 
 
-# In[115]:
-
-
 # Drug Abuse
 d_data = dict(
         type = 'choropleth',
@@ -216,8 +155,6 @@ d_data = dict(
 d_layout = dict(title = 'Prevalence of Drug Abuse in North America in 2017', 
               geo = dict({'scope':'north america'}, projection = {'type':'natural earth'}, showframe = True))
 
-
-# In[116]:
 
 
 # Depression
@@ -235,9 +172,6 @@ dep_layout = dict(title = 'Prevalence of Depressive Disorder in Latin America in
               geo = dict({'scope':'north america'}, projection = {'type':'natural earth'}, showframe = True))
 
 
-# In[117]:
-
-
 # Alcohol Abuse
 alc_data = dict(
         type = 'choropleth',
@@ -253,64 +187,33 @@ alc_layout = dict(title = 'Prevalence of Alcohol Abuse in North America in 2017'
               geo = dict({'scope':'north america'}, projection = {'type':'natural earth'}, showframe = True))
 
 
-# In[118]:
-
-
 go.Figure(data = [sch_data],layout = sch_layout) 
 choromap = go.Figure(data = [sch_data],layout = sch_layout) 
 iplot(choromap)
-
-
-# In[119]:
-
 
 go.Figure(data = [ed_data],layout = ed_layout) 
 choromap = go.Figure(data = [ed_data],layout = ed_layout) 
 iplot(choromap)
 
-
-# In[120]:
-
-
 go.Figure(data = [anx_data],layout = anx_layout) 
 choromap = go.Figure(data = [anx_data],layout = anx_layout) 
 iplot(choromap)
-
-
-# In[121]:
-
 
 go.Figure(data = [d_data],layout = d_layout) 
 choromap = go.Figure(data = [d_data],layout = d_layout) 
 iplot(choromap)
 
-
-# In[122]:
-
-
 go.Figure(data = [dep_data],layout = dep_layout) 
 choromap = go.Figure(data = [dep_data],layout = dep_layout) 
 iplot(choromap)
-
-
-# In[123]:
-
 
 go.Figure(data = [alc_data],layout = alc_layout) 
 choromap = go.Figure(data = [alc_data],layout = alc_layout) 
 iplot(choromap)
 
-
-# In[124]:
-
-
 go.Figure(data = [bp_data],layout = bp_layout) 
 choromap = go.Figure(data = [bp_data],layout = bp_layout) 
 iplot(choromap)
-
-
-# In[130]:
-
 
 # Crear la matriz de correlación
 matriz_correlacion = dfc[columnas_seleccionadas].corr()
